@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/layoutId"
     tools:context="com.example.pichau.jogodoarrocha.MainActivity">
 
     <TextView
+        android:id="@+id/tvResultado"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/colorPerdeu"
         android:text="Resultado"
         android:gravity="center_horizontal"
-        android:textColor="@color/colorBranco"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

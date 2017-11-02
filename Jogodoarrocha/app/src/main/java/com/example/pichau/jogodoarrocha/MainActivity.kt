@@ -1,5 +1,6 @@
 package com.example.pichau.jogodoarrocha
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -38,6 +39,10 @@ class MainActivity : AppCompatActivity() {
                 etChute.text.toString().toInt() >= valor_maximo){
             this.pontuacao -= 10
            Toast.makeText(this,"Vc Perdeu! num sorteado: ${this.num_sorteado}", Toast.LENGTH_SHORT).show()
+            val texto_perdeu = "Voce Perdeu!!!"
+            val it = Intent(this, ResultadoActivity::class.java)
+            it.putExtra("TEXTO", texto_perdeu)
+            startActivity(it)
         }else if(etChute.text.toString().toInt() < num_sorteado){
             this.valor_minimo = etChute.text.toString().toInt()
             this.pontuacao += 5
@@ -50,7 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         if(this.pontuacao <= 0){
             Toast.makeText(this, "Voce Perdeu!, pontuacao : ${this.pontuacao}", Toast.LENGTH_SHORT).show()
-            //TELA VERMELHA : VC PERDEU!
+            val texto_perdeu = "Voce Perdeu!!!"
+            val it = Intent(this, ResultadoActivity::class.java)
+            it.putExtra("TEXTO", texto_perdeu)
+            startActivity(it)
         }else{
             Toast.makeText(this, "Sua pontuacao: ${this.pontuacao}", Toast.LENGTH_SHORT).show()
         }
@@ -58,7 +66,12 @@ class MainActivity : AppCompatActivity() {
         //QUANDO GANHAR
         if(this.valor_minimo == this.num_sorteado - 1 && this.valor_maximo == this.num_sorteado + 1){
             Toast.makeText(this, "VC GANHOU! PARABENS. Arrochou (${this.num_sorteado})", Toast.LENGTH_SHORT).show()
+            val texto = "Voce ganhou!!!"
+            val it = Intent(this, ResultadoActivity::class.java)
+            it.putExtra("TEXTO", texto)
+            startActivity(it)
         }
+
     }
 
 
