@@ -15,9 +15,8 @@ import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
     lateinit var btFoto:Button
-    lateinit var visualizarFt:Button
     val REQUEST_IMAGE_CAPTURE = 1
-    lateinit var mImageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,16 +35,18 @@ class MainActivity : AppCompatActivity() {
         if(it.resolveActivity(packageManager) != null){
             startActivityForResult(it, REQUEST_IMAGE_CAPTURE)
         }
-
-        //onActivityResult(REQUEST_IMAGE_CAPTURE, 1, it)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            val extras = data.extras
-            val imageBitmap = extras!!.get("data") as Bitmap
-            mImageView.setImageBitmap(imageBitmap)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            val img = data?.extras
+            val it = Intent(Intent.ACTION_SEND)
+            it.setType("image/*")
+            it.putExtra(Intent.EXTRA_STREAM, img)
+            startActivity(it)
         }
     }
 
